@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% include ../partials/head %>
+<body>
+  <% include ../partials/header %>
+      
+      
+      
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12"> 
+            <div class="panel">
+              <div class="panel-body">
+                <div class="row">           
+                  <form  action="/addP" method="POST" enctype="multipart/form-data">
+                   <div class="form-group">
+                   <label for="exampleInputEmail1">nameP</label>
+                   <input type="text" name="nameP" value="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">categorie</label>
+                    <input type="text" name="categorie" value="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                   </div>
+                   <div class="form-group">
+                    <label for="exampleInputEmail1">img</label>
+                    <input type="file" name="file" value="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                   </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Quantité</label>
+                    <input type="text" name="quantité"  value="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                   </div>  <div class="form-group">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">price</label>
+                      <input type="text" name="price"  value="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                     </div>  <div class="form-group">
+                       </div>  <div class="form-group">
+                    <label for="exampleInputEmail1">ID-Rayon</label>
+                   
+                    <select  name="id_R" id="exampleInputEmail1" class="form-control" aria-describedby="emailHelp">
+                        <% for(item of items){%>
+                        <option value="<%= item.id_R %>"><%= item.name1 %></option>
+                        <%}%>
+                      </select>
+                   </div>
+                  </div>  
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">ID-Fornisseur</label>
+                     <select  name="id_F" id="exampleInputEmail1" class="form-control">
+                        <% for(item of items){%>
+                        <option value="<%= item.id_F %>"><%= item.name %></option>
+                        <%}%>
+                      </select>
+                   </div>
+              
+                 <button type="submit"  name="submit" value="ADD" class="btn btn-primary">Ajoute</button>
+            </form>                            
+             </div><!--/col-12-->
+        </div>
+      </div>                                                                            
+      <% include ../partials/footer %>
+   
+</body>
+</html>

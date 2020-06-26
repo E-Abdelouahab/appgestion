@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% include ../partials/head %>
+<body>
+  <% include ../partials/header %>
+      
+    
+      
+      
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-md-12"> 
+            
+            <div class="panel">
+              <div class="panel-body">
+              
+                <div class="row">   
+                   
+            <div class="container">
+
+               <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand" style="color: #fff;"><a href="/" style="text-decoration: none; color: white;">Rayon</a></span>
+          </nav>
+             <div class="col s12" style="margin-top: 3%;">
+
+            
+                    <table class="table">
+                    <thead>
+                        <tr>
+                          <th style="width: 15%;text-align: center;">ID</th>
+                            <th style="width: 15%;text-align: center;">Name</th>
+                            <th style="width: 15%;text-align: center;">Category</th>
+                            <th style="width: 15%;text-align: center;">image</th>
+                            <th style="width: 15%;text-align: center;">Quantité</th>
+                            <th style="width: 15%;text-align: center;">Price</th>
+                          
+                            <th style="width: 15%;text-align: center;">Rayon</th>
+                            <th style="width: 15%;text-align: center;">ID-F</th>
+                            <th solspan="2" style="width: 20%;text-align: center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% for(var i = 0;i < items.length; i++){
+            
+                          %>
+                      
+                    
+                            <tr>
+                                <td style="width: 15%;text-align: center;"><a href="/fornisseur/ " style="color: black; text-decoration: none;"><%= items[i].id_P %></a></td>
+                                <td style="width: 15%;text-align: center;"><%= items[i].name_P %></td>
+                                <td style="width: 15%;text-align: center;"><%= items[i].category %> </td>
+                                <th style="width: 15%;text-align: center;"><img width="150PX" src="img/<%= items[i].img %>" alt=""> </th>
+                                <td style="width: 15%;text-align: center;"><%= items[i].quantite %></td>
+                                <td style="width: 15%;text-align: center;"><%= items[i].price %> $</td>
+                                <td style="width: 15%;text-align: center;"><%= items[i].id_R %></td>
+                                <td style="width: 15%;text-align: center;"><%= items[i].id_F %></td>
+                                <td solspan="2" style="width: 20%;text-align: center;">
+                                  <button type="submit" name="btn_edit" data-toggle="modal" data-target="" class="btn btn-success btn-sm btn-circle btnedit">
+                                    Edit
+                                </button>
+                         
+                                    <a href="/delete/<%= items[i].id_P %>" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            <%}%>
+                    </tbody>
+                </table>
+            
+                <p><strong>other items</strong></p>
+              </div>
+            <div class="col s12" style="margin-top: 3%;">
+                <a href="/add" class="btn btn-info btn-lg">Add new produit</a>
+            </div>
+             </div><!--/col-12-->
+        </div>
+      </div>   
+      <!-- edit model  -->
+      <div id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <form  action="/editProduct" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id_P" id="id" class="form-control" placeholder="you text">
+               <div class="form-group">
+               <label for="exampleInputEmail1">nameP</label>
+               <input type="text" name="nameP" value="" class="form-control" id="nameP" aria-describedby="emailHelp">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">categorie</label>
+                <input type="text" name="categorie" value="" class="form-control" id="categorie" aria-describedby="emailHelp">
+               </div>
+               <div class="form-group">
+                <label for="exampleInputEmail1">IMAGE</label>
+                <input type="file" name="file" value="" class="form-control" id="image" aria-describedby="emailHelp">
+               </div>
+
+              <div class="form-group">
+                <label for="exampleInputEmail1">Quantité</label>
+                <input type="text" name="quantité"  class="form-control" id="quantite" aria-describedby="emailHelp">
+               </div>  <div class="form-group">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">price</label>
+                  <input type="text" name="price"   class="form-control" id="price" aria-describedby="emailHelp">
+                 </div>  <div class="form-group">
+                   </div>  <div class="form-group">
+                <label for="exampleInputEmail1">ID-Rayon</label>
+               
+                <select  name="id_R" id="id_R" class="form-control" aria-describedby="emailHelp">
+                    <% for(item of items2){%>
+                    <option value="<%= item.id_R %>"><%= item.name1 %></option>
+                    <%}%>
+                  </select>
+               </div>
+              </div>  
+              <div class="form-group">
+                <label for="exampleInputEmail1">ID-Fornisseur</label>
+                 <select  name="id_F" id="id_F" class="form-control">
+                    <% for(item of items3){%>
+                    <option value="<%= item.id_F %>"><%= item.name %></option>
+                    <%}%>
+                  </select>
+               </div>
+          
+             <button type="submit"  name="submit" value="ADD" class="btn btn-primary">Ajoute</button>
+        </form>   
+            </div>
+        </div>
+    </div>  
+    <!-- end edit modal  -->   
+   
+
+      <% include ../partials/footer %>
+      
+      <script>
+        $(document).ready(function() {
+            $('.btnedit').on('click', function() {
+                $('#editmodal').modal('show');
+    
+                $tr = $(this).closest('tr');
+                var data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+    
+                console.log(data);
+    
+                $('#id').val(data[0]);
+                $('#nameP').val(data[1]);
+                $('#categorie').val(data[2]);
+                
+                $('#quantite').val(data[3]);
+                $('#price').val(data[4]);
+                $('#id_R').val(data[5]);
+                $('#id_F').val(data[6]);
+               
+    
+    
+    
+            });
+        });
+    </script>
+     
+</body>
+</html>

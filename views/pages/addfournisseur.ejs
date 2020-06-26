@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% include ../partials/head %>
+<body>
+  <% include ../partials/header %>
+      
+      
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12"> 
+            <div class="panel">
+              <div class="panel-body">
+                <div class="row">           
+                  <form  action="/addforni" method="POST">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">name</label>
+                      <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                     </div>
+                   <div class="form-group">
+                   <label for="exampleInputEmail1">adrress</label>
+                   <input type="text" name="address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">tele</label>
+                    <input type="text" name="tele" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                   </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">email</label>
+                    <input type="text" name="email"  value="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                   </div>  
+                    
+                    
+                  
+              
+                 <button type="submit"  name="submit" value="ADD" class="btn btn-primary">Ajoute</button>
+            </form>                            
+             </div><!--/col-12-->
+        </div>
+      </div>                                                                            
+      <% include ../partials/footer %>
+     
+</body>
+</html>

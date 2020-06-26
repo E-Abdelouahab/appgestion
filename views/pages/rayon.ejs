@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% include ../partials/head %>
+<body>
+  <% include ../partials/header %>
+      
+    
+      
+      
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-md-12"> 
+            
+            <div class="panel">
+              <div class="panel-body">
+              
+                <div class="row">   
+                   
+            <div class="container">
+
+               <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand" style="color: #fff;"><a href="/" style="text-decoration: none; color: white;">Rayon</a></span>
+          </nav>
+             <div class="col s12" style="margin-top: 3%;">
+              <% for(rayon of items){%>
+                    <table class="table">
+                    <thead>
+                        <tr>
+                          <th style="width: 15%;text-align: center;">id</th>
+                            <th style="width: 15%;text-align: center;">name</th>
+                            
+                      
+                            <th solspan="2" style="width: 20%;text-align: center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                              <td style="width: 15%;text-align: center;"><%= rayon.id_R %></td>
+                                 <td style="width: 15%;text-align: center;"><%= rayon.name1 %></td>
+                              
+                                <td solspan="2" style="width: 20%;text-align: center;">
+                                  <button type="submit" name="btn_edit" data-toggle="modal" data-target="" class="btn btn-success btn-sm btn-circle btnedit">
+                                    Edit
+                                </button>
+                                    <!-- <a href="/editR/<%= rayon.id_R %>" class="btn btn-success">Edit</a> -->
+                                    <a href="/delete-rayon/<%= rayon.id_R %>" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                  
+                    </tbody>
+                </table>
+                <%}%>
+                <p><strong>other rayons</strong></p>
+              </div>
+            <div class="col s12" style="margin-top: 3%;">
+                <a href="/addrayon" class="btn btn-info btn-lg">Add new rayon</a>
+            </div>
+             </div><!--/col-12-->
+        </div>
+      </div> 
+      <% include ../partials/footer %>   
+      <div id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <form  action="/updaterayon" method="POST">
+                <input type="hidden" name="id" id="id" class="form-control" placeholder="you text">
+               <div class="form-group">
+               <label for="exampleInputEmail1">name</label>
+               <input type="text" name="name" value="" class="form-control" id="name" aria-describedby="emailHelp">
+              </div>                  
+              </div>  
+              
+             <button type="submit"  name="submit" value="ADD" class="btn btn-primary">update</button>
+        </form>   
+            </div>
+        </div>
+    </div>
+      
+
+                 
+             
+        
+    
+            <script>
+              $(document).ready(function() {
+                  $('.btnedit').on('click', function() {
+                      $('#editmodal').modal('show');
+          
+                      $tr = $(this).closest('tr');
+                      var data = $tr.children("td").map(function() {
+                          return $(this).text();
+                      }).get();
+          
+                      console.log(data);
+          
+                      $('#id').val(data[0]);
+                      $('#name').val(data[1]);
+          
+                  });
+              });
+          </script>
+</body>
+</html>
+
